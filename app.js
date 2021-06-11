@@ -1,80 +1,12 @@
-/*
-//Define vars to hold time values
-let seconds = 0;
-let minutes = 0;
-let hours = 0;
-
-//Define vars to hold "display" value
-let displaySeconds=0;
-let displayMinutes=0;
-let displayHours=0;
-
-//define var to hold setInterval() function
-let interval = null;
-//define var to hold stopwatch status
-let status="stopped";
-
-function stopwatch() {
-  seconds++;
-  if (seconds / 60 === 1) {
-    seconds = 0;
-    minutes++;
-  
-  if (minutes / 60 === 1) {
-    minutes = 0;
-    hours++;
-  }
-}
-
-//If seconds/minutes/hours are only one digit, add a leading = to the value
-if(seconds < 10){
-displaySeconds="0" + seconds.toString();
-}
-else{
-  displaySeconds=seconds
-}
-if(minutes < 10){
-  displayMinutes="0" + minutes.toString();
-  }
-  else{
-    displayMinutes=minutes
-  }
-
-  if(hours < 10){
-    displayHours ="0" + hours.toString();
-  }
-  else{
-    displayHours = hours;
-  }
-
-
-  //Display updated time values to user
-  document.getElementById("tracker").innerHTML = displayHours +":"+ displayMinutes +":"+ displaySeconds;
-
-}
-
-window.setInterval(stopWatch, 1000);
-
-function startStop(){
-
-  if(status === "stopped"){
-
-    //start the stop watch
-    interval = window.setInterval(stopwatch, 1000);
-    document.getElementById("start").innerHTML = "Fight!";
-    status ="started";
-  }
- 
-}
-*/
 function getRandomValue(max, min) {
   return Math.floor(Math.random() * (max - min)) + min;
-
 }
 
 const app = Vue.createApp({
   data() {
     return {
+      timerEnabled: true,
+      timerCount: 20,
       playerHealth: 100,
       monsterHealth: 100,
       currentRound: 0,
@@ -100,12 +32,56 @@ const app = Vue.createApp({
       return this.currentRound % 3 !== 0;
     },
     mayUseHeal() {
-
       return this.healsleft <= 0;
+    },
+    formattedtimeleft() {
+
+     
+
+      const timeleft = this.timeleft;
+      // The largest round integer less than or equal to the result of time divided being by 60.
+
+      const minutes = Math.floor(timeLeft / 60);
+      // Seconds are the remainder of the time divided by 60 (modulus operator)
+
+      let seconds = timeLeft % 60;
+      // If the value of seconds is less than 10, then display seconds with a leading zero
+      if (seconds < 10) {
+        seconds = `0${seconds}`;
+      }
+      
+      // The output in MM:SS format
+      return `${minutes}:${seconds}`;
+
+     
+    },
+    neuerCountdown(){
+
+  return this.timerCount; 
 
     },
+   
   },
   watch: {
+    timerEnabled(value) {
+      if (value) {
+        setTimeout(() => {
+          this.timerCount--;
+        }, 1000);
+      }
+    },
+
+    timerCount: {
+      handler(value) {
+        if (value > 0 && this.timerEnabled) {
+          setTimeout(() => {
+            this.timerCount--;
+          }, 1000);
+        }
+      },
+      immediate: true, // This ensures the watcher is triggered upon creation
+    },
+
     playerHealth(value) {
       if (value <= 0 && this.monsterHealth <= 0) {
         //draw
@@ -113,7 +89,6 @@ const app = Vue.createApp({
       } else if (value <= 0) {
         //player lost
         this.winner = "monster";
-        this.healsleft++
       }
     },
     monsterHealth(value) {
@@ -127,6 +102,11 @@ const app = Vue.createApp({
     },
   },
   methods: {
+    play() {
+      this.timerEnabled = true;
+      return this.timerCount = 20;
+    },
+
     attackMonster() {
       this.currentRound++;
       const attackValue = getRandomValue(17, 12);
@@ -158,7 +138,7 @@ const app = Vue.createApp({
         this.playerHealth += healValue;
       }
       if (this.healsleft < 0) {
-        return this.healsleft = 0;
+        return (this.healsleft = 0);
       }
       this.battleLogMessage("player", "heal", healValue);
       this.attackPlayer();
@@ -186,13 +166,8 @@ const app = Vue.createApp({
       this.logMessages = [];
       this.timer = 0;
       this.healsleft = 3;
-     /* window.clearInterval(interval);
-      seconds=0;
-      minutes=0;
-      hours=0;
-      document.getElementById("tracker").innerHTML="00:00:00";
-      document.getElementById("startStop").innerHTML="Start the Timer";
-      */
+      this.timerCount = 20;
+      
     },
 
     battleLogMessage(who, what, value) {
