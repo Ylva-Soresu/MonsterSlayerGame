@@ -1,4 +1,4 @@
-
+/*
 //Define vars to hold time values
 let seconds = 0;
 let minutes = 0;
@@ -66,7 +66,7 @@ function startStop(){
   }
  
 }
-
+*/
 function getRandomValue(max, min) {
   return Math.floor(Math.random() * (max - min)) + min;
 
@@ -186,12 +186,13 @@ const app = Vue.createApp({
       this.logMessages = [];
       this.timer = 0;
       this.healsleft = 3;
-      window.clearInterval(interval);
+     /* window.clearInterval(interval);
       seconds=0;
       minutes=0;
       hours=0;
       document.getElementById("tracker").innerHTML="00:00:00";
       document.getElementById("startStop").innerHTML="Start the Timer";
+      */
     },
 
     battleLogMessage(who, what, value) {
