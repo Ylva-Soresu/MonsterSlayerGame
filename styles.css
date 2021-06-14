@@ -3,15 +3,16 @@
 }
 
 html {
-  font-family: 'Jost', sans-serif;
-  background-color: #1d0633
+  font-family: "Jost", sans-serif;
+  background-color: #1d0633;
 }
 
 body {
   margin: 0;
 }
 
-.timer{
+.timer {
+  position: relative;
   display: flex;
   justify-content: center;
   padding: 0.3rem;
@@ -19,17 +20,16 @@ body {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
   border-radius: 12px;
   margin-bottom: 3rem;
-  font-size: 20px;;
+  font-size: 20px;
   color: #32144f;
 }
 
-.kreis{
-  stroke-dasharray: 283 283;
-  background-color:rgb(255, 255, 255);
+.kreis {
+  background-color: rgb(255, 255, 255);
   width: 170px;
   height: 170px;
   border-radius: 50%;
-  border: 16px solid #27a327;
+  border: 16px solid #52d3f3;
   text-align: center;
 }
 
@@ -50,7 +50,6 @@ section {
   margin: auto;
   background-color: white;
   border-radius: 12px;
-  
 }
 
 .healthbar {
@@ -60,9 +59,7 @@ section {
   margin: 2rem 0;
   background: #c40000;
   border-radius: 1px;
-  
 }
-
 
 .healthbar__value {
   background-color: #52d3f3;
@@ -70,23 +67,20 @@ section {
   height: 100%;
   margin-bottom: 1rem;
   border-radius: 1px;
- 
 }
 
 .container {
- 
   text-align: center;
   padding: 2.9rem;
   margin: 1rem auto;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
   border-radius: 2px;
-  
 }
 
-.containerMonster{
+.containerMonster {
   float: right;
   text-align: center;
-  padding: 2.0rem;
+  padding: 2rem;
   margin: 1rem auto;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
   border-radius: 12px;
@@ -94,31 +88,28 @@ section {
   color: #ffffff;
 }
 
-.containerPlayer{
+.containerPlayer {
   float: left;
   text-align: center;
-  padding: 2.0rem;
+  padding: 2rem;
   margin: 1rem auto;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
   border-radius: 12px;
   background-color: #ffffff;
 }
 
-.container1{
+.container1 {
   text-align: center;
   padding: 2.9rem;
-  margin: 1rem auto; 
+  margin: 1rem auto;
   border-radius: 9px;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   font-size: large;
   color: #32144f;
   border-radius: 10px;
-  
-
-  
 }
 
-.container2{
+.container2 {
   text-align: center;
   padding: 2.9rem;
   margin: 1rem auto;
@@ -127,7 +118,6 @@ section {
   background-color: snow;
   border-style: solid;
   border-color: #32144f;
-
 }
 
 #monster h2,
@@ -136,12 +126,11 @@ section {
 }
 
 #controls {
-  display:flex ;
+  display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  
 }
 
 button {
@@ -181,13 +170,10 @@ button:disabled {
   margin: 0;
   padding: 0;
   background-color: #ffffff;
-
-
 }
 
 #log li {
   margin: 0.5rem 0;
-  
 }
 
 .log--player {
@@ -205,6 +191,6 @@ button:disabled {
 .log--heal {
   color: #0c945b;
 }
-.log--shield{
+.log--shield {
   color: darkgrey;
 }

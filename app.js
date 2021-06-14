@@ -34,33 +34,9 @@ const app = Vue.createApp({
     mayUseHeal() {
       return this.healsleft <= 0;
     },
-    formattedtimeleft() {
-
-
-
-      const timeleft = this.timeleft;
-      // The largest round integer less than or equal to the result of time divided being by 60.
-
-      const minutes = Math.floor(timeLeft / 60);
-      // Seconds are the remainder of the time divided by 60 (modulus operator)
-
-      let seconds = timeLeft % 60;
-      // If the value of seconds is less than 10, then display seconds with a leading zero
-      if (seconds < 10) {
-        seconds = `0${seconds}`;
-      }
-
-      
-      // The output in MM:SS format
-      return `${minutes}:${seconds}`;
-
-
-    },
-    neuerCountdown() {
-
+    timeUp() {
       return this.timerCount;
-
-    },
+    }
 
   },
   watch: {
@@ -78,47 +54,53 @@ const app = Vue.createApp({
           setTimeout(() => {
             this.timerCount--;
           }, 1000);
-        } 
-        
-       
-  
+        } else if (value <= 0 && this.monsterHealth <= 0 && this.playerHealth <= 0) {
+          this.winner = "draw";
+        } else if (value <= 0 && this.playerHealth <= 0) {
+          this.winner = "monster";
+        } else if (value <= 0 && this.monsterHealth <= 0) {
+          this.winner = "player";
+
+        } else {
+          this.winner = "timeUp";
+        }
+
+
+
       },
       immediate: true, // This ensures the watcher is triggered upon creation
     },
 
+
+
     playerHealth(value) {
       if (value <= 0 && this.monsterHealth <= 0) {
         //draw
-        
+
         this.winner = "draw";
-        
+
       } else if (value <= 0) {
         //player lost
-        
+
         this.winner = "monster";
-      
+
       }
     },
     monsterHealth(value) {
       if (value <= 0 && this.playerHealth <= 0) {
         //draw
-        
+
         this.winner = "draw";
-       
+
       } else if (value <= 0) {
         //monster lost
-        
+
         this.winner = "player";
-        
+
       }
     },
   },
   methods: {
-    play() {
-      this.timerEnabled = true;
-      return this.timerCount = 20;
-      
-    },
 
     attackMonster() {
       this.currentRound++;
@@ -177,7 +159,7 @@ const app = Vue.createApp({
       this.winner = null;
       this.currentRound = 0;
       this.logMessages = [];
-      this.timer = 0;
+
       this.healsleft = 3;
       this.timerCount = 20;
 
