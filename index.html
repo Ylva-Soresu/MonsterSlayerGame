@@ -18,17 +18,19 @@
   <div id="game">
     <section>
       <div class="timer">
-       <div class="kreis">
+        <div class="kreis">
           <h2>{{ timerCount }}</h2>
         </div>
       </div>
-     
+
     </section>
     <section id="monster" class="containerMonster">
       <img src="https://sm.ign.com/ign_de/screenshot/default/kyloren-sw_hsgr.jpg" width="400" />
       <h2>Kylo Ren</h2>
+
       <div class="healthbar">
         <div class="healthbar__value" v-bind:style="monsterBarStyles"></div>
+
       </div>
     </section>
     <section id="player" class="containerPlayer">
@@ -43,11 +45,11 @@
     </section>
     <hr color="#1d0633">
     <section class="container1" v-if="winner">
-
-      <h1 v-if="winner === 'draw'">You killed each other! Its a draw!</h1>
+      <h1 v-if="winner === 'timeUp'">Time is up! Its a draw!</h1>
+      <h1 v-else-if="winner === 'draw'">You killed each other! Its a draw!</h1>
       <h1 v-else-if="winner === 'monster'">You lost!</h1>
       <h1 v-else="winner === 'player'">You won!</h1>
-      <button v-bind:disabled="neuerCountdown" @click="startNewGame">Start new Game!</button>
+      <button v-bind:disabled="timeUp" @click="startNewGame">Start new Game!</button>
     </section>
     <section id="controls" v-else>
 
