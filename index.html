@@ -16,39 +16,41 @@
     <h1>Monster Slayer</h1>
   </header>
   <div id="game">
-    <section class="time"><h1 id="tracker">00:00:00</h1>
-    <button id="start" onclick="start//Stop()\\">Start the Timer</button>
+    <section> <div class="timer"><h2 >Timer: {{ timerCount }}</h2></div>  
     </section>
     <section id="monster" class="containerMonster">
+      <img src= "https://lh3.googleusercontent.com/proxy/qZe9d3hHs5BxcnzdgG1VvK0APgkdKkj0ZqPwaLzc3E6l2RWgOLTm2VafO4W02E1HJokYpgCAlTc9Um4xn2_WtNSMfAjBSdUOyHOSblqlcr-ML3OHypTUbNmHD1PVvlr2yN2Lk_2spTQNQdTf5iXED_ujZj0e3OlX5G18Kz9zR1GQlguC0Q5E9g__ZIXpAB2ttCZng6CcC5VpFYIo" width="400"/>
       <h2>Monster Health</h2>
       <div class="healthbar">
         <div class="healthbar__value" v-bind:style="monsterBarStyles"></div>
       </div>
     </section>
     <section id="player" class="containerPlayer">
-      <h2>Your Health</h2>
+      <img src="https://images.hdqwalls.com/wallpapers/obi-wan-kenobi-star-wars-character-4k-os.jpg" width="400"/>
       
+        <h2>Your Health</h2>
+
       <div class="healthbar">
         <div class="healthbar__value" v-bind:style="playerBarStyles"></div>
         <div><b>Heal potions: {{healsleft}}</b></div>
       </div>
     </section>
-
+    <hr color="#1d0633">
     <section class="container1" v-if="winner">
-     
+
       <h1 v-if="winner === 'draw'">You killed each other! Its a draw!</h1>
       <h1 v-else-if="winner === 'monster'">You lost!</h1>
       <h1 v-else="winner === 'player'">You won!</h1>
-      <button @click="startNewGame">Start new Game!</button>
+      <button v-bind:disabled="neuerCountdown" @click="startNewGame">Start new Game!</button>
     </section>
     <section id="controls" v-else>
-      
+
       <button @click="attackMonster">ATTACK</button>
       <button v-bind:disabled="mayUseSpecialAttack" @click=" specialAttackMonster">SPECIAL ATTACK</button>
       <button v-bind:disabled="mayUseHeal" @click="healPlayer">HEAL</button>
       <button @click="shield">SHIELD</button>
       <button @click="surrender">SURRENDER</button>
-      
+
     </section>
 
     <section id="log" class="container2">
@@ -66,8 +68,8 @@
           <span v-else-if="logMessages.actionType==='special-attack'"> use special-attack! <span class="log--damage">{{
               logMessages.actionValue}} </span></span>
 
-              <span v-else-if="logMessages.actionType==='shield'"> defense himself! <span class="log--shield">{{
-                logMessages.actionValue}} </span></span>
+          <span v-else-if="logMessages.actionType==='shield'"> defense himself! <span class="log--shield">{{
+              logMessages.actionValue}} </span></span>
 
           <span v-else> attacks! <span class="log--damage">{{ logMessages.actionValue}}</span></span>
 
