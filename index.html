@@ -13,22 +13,28 @@
 
 <body>
   <header>
-    <h1>Monster Slayer</h1>
+    <h1>Star Wars </h1>
   </header>
   <div id="game">
-    <section> <div class="timer"><h2 >Timer: {{ timerCount }}</h2></div>  
+    <section>
+      <div class="timer">
+       <div class="kreis">
+          <h2>{{ timerCount }}</h2>
+        </div>
+      </div>
+     
     </section>
     <section id="monster" class="containerMonster">
-      <img src= "https://lh3.googleusercontent.com/proxy/qZe9d3hHs5BxcnzdgG1VvK0APgkdKkj0ZqPwaLzc3E6l2RWgOLTm2VafO4W02E1HJokYpgCAlTc9Um4xn2_WtNSMfAjBSdUOyHOSblqlcr-ML3OHypTUbNmHD1PVvlr2yN2Lk_2spTQNQdTf5iXED_ujZj0e3OlX5G18Kz9zR1GQlguC0Q5E9g__ZIXpAB2ttCZng6CcC5VpFYIo" width="400"/>
-      <h2>Monster Health</h2>
+      <img src="https://sm.ign.com/ign_de/screenshot/default/kyloren-sw_hsgr.jpg" width="400" />
+      <h2>Kylo Ren</h2>
       <div class="healthbar">
         <div class="healthbar__value" v-bind:style="monsterBarStyles"></div>
       </div>
     </section>
     <section id="player" class="containerPlayer">
-      <img src="https://images.hdqwalls.com/wallpapers/obi-wan-kenobi-star-wars-character-4k-os.jpg" width="400"/>
-      
-        <h2>Your Health</h2>
+      <img src="https://images.hdqwalls.com/wallpapers/obi-wan-kenobi-star-wars-character-4k-os.jpg" width="400" />
+
+      <h2>Obi-Wan-Kenobi</h2>
 
       <div class="healthbar">
         <div class="healthbar__value" v-bind:style="playerBarStyles"></div>
@@ -46,7 +52,7 @@
     <section id="controls" v-else>
 
       <button @click="attackMonster">ATTACK</button>
-      <button v-bind:disabled="mayUseSpecialAttack" @click=" specialAttackMonster">SPECIAL ATTACK</button>
+      <button v-bind:disabled="mayUseSpecialAttack" @click=" specialAttackMonster">FORCE ATTACK</button>
       <button v-bind:disabled="mayUseHeal" @click="healPlayer">HEAL</button>
       <button @click="shield">SHIELD</button>
       <button @click="surrender">SURRENDER</button>
@@ -60,12 +66,12 @@
 
           <span
             :class="{'log--player': logMessages.actionBy==='player', 'log--monster': logMessages.actionBy==='monster'}">
-            {{logMessages.actionBy==='player'? 'Player' : 'Monster'}}</span>
+            {{logMessages.actionBy==='player'? 'Obi-Wan-Kenobi' : 'Kylo Ren'}}</span>
 
           <span v-if="logMessages.actionType==='heal'"> heals himself up! <span class="log--heal">{{
               logMessages.actionValue}} </span></span>
 
-          <span v-else-if="logMessages.actionType==='special-attack'"> use special-attack! <span class="log--damage">{{
+          <span v-else-if="logMessages.actionType==='special-attack'"> use force-attack! <span class="log--damage">{{
               logMessages.actionValue}} </span></span>
 
           <span v-else-if="logMessages.actionType==='shield'"> defense himself! <span class="log--shield">{{

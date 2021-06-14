@@ -36,7 +36,7 @@ const app = Vue.createApp({
     },
     formattedtimeleft() {
 
-     
+
 
       const timeleft = this.timeleft;
       // The largest round integer less than or equal to the result of time divided being by 60.
@@ -49,18 +49,19 @@ const app = Vue.createApp({
       if (seconds < 10) {
         seconds = `0${seconds}`;
       }
+
       
       // The output in MM:SS format
       return `${minutes}:${seconds}`;
 
-     
-    },
-    neuerCountdown(){
-
-  return this.timerCount; 
 
     },
-   
+    neuerCountdown() {
+
+      return this.timerCount;
+
+    },
+
   },
   watch: {
     timerEnabled(value) {
@@ -77,7 +78,10 @@ const app = Vue.createApp({
           setTimeout(() => {
             this.timerCount--;
           }, 1000);
-        }
+        } 
+        
+       
+  
       },
       immediate: true, // This ensures the watcher is triggered upon creation
     },
@@ -85,19 +89,27 @@ const app = Vue.createApp({
     playerHealth(value) {
       if (value <= 0 && this.monsterHealth <= 0) {
         //draw
+        
         this.winner = "draw";
+        
       } else if (value <= 0) {
         //player lost
+        
         this.winner = "monster";
+      
       }
     },
     monsterHealth(value) {
       if (value <= 0 && this.playerHealth <= 0) {
         //draw
+        
         this.winner = "draw";
+       
       } else if (value <= 0) {
         //monster lost
+        
         this.winner = "player";
+        
       }
     },
   },
@@ -105,6 +117,7 @@ const app = Vue.createApp({
     play() {
       this.timerEnabled = true;
       return this.timerCount = 20;
+      
     },
 
     attackMonster() {
@@ -167,7 +180,7 @@ const app = Vue.createApp({
       this.timer = 0;
       this.healsleft = 3;
       this.timerCount = 20;
-      
+
     },
 
     battleLogMessage(who, what, value) {
